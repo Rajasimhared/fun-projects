@@ -27,10 +27,13 @@ function init() {
 init();
 
 document.addEventListener("keydown", (e) => {
-  let audios = [...document.querySelectorAll(`[data-key="${e.keyCode}"`)];
-  audios[0].classList.add("playing");
-  audios[1].play();
+  const audio = document.querySelector(`audio[data-key="${e.keyCode}"`);
+  const key = document.querySelector(`div[data-key="${e.keyCode}"`);
+  if (!audio) return;
+  key.classList.add("playing");
+  audio.currentTime = 0;
+  audio.play();
   setTimeout(() => {
-    audios[0].classList.remove("playing");
+    key.classList.remove("playing");
   }, 100);
 });
